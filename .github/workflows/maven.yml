@@ -35,7 +35,8 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: test
       run: mvn test
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+    - name: Upload JAR artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: mon-app-java
+        path: target/demo-0.0.1-SNAPSHOT.jar
