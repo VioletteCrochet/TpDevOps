@@ -36,4 +36,4 @@ jobs:
     - name: test
       run: mvn test
     - name: Upload JAR artifact
-      run: mvnd packagemvn
+      run: mvn package
