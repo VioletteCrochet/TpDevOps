@@ -18,7 +18,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -38,14 +37,23 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-maven-
 
-    - name: test
-      run: mvn test
-      
     - name: Build with Maven
       run: mvn clean package -DskipTests=false
 
-    - name: Upload JAR artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: helloapi-jar
-        path: target/*.jar
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: test
+        run: mvn test
+    
+  publish:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: helloapi-jar
+          path: target/*.jar
+  
