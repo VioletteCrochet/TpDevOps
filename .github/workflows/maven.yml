@@ -36,7 +36,4 @@ jobs:
     - name: test
       run: mvn test
     - name: Upload JAR artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: TpDevOps
-        path: target/demo-0.0.1-SNAPSHOT.jar
+      run: mvnd packagemvn
