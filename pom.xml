@@ -56,16 +56,11 @@
 			</plugin>
 		</plugins>
 	</build>
-	<distributionManagement>
+	 <distributionManagement>
     <repository>
-        <id>releases</id>
-        <url>https://github.com/VioletteCrochet/TpDevOps.git</url>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/TpDevOps</url>
     </repository>
-    <snapshotRepository>
-        <id>snapshots</id>
-        <url>https://github.com/VioletteCrochet/TpDevOps.git</url>
-    </snapshotRepository>
-
-</distributionManagement>
-
+  </distributionManagement>
 </project>
