@@ -42,6 +42,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    needs: build
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -51,7 +52,7 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: 21
-        
+
     - name: test
       run: mvn test
 
