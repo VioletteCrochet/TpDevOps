@@ -8,7 +8,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(){
-        return "welcome to my site2";
+        return "welcome to my site 3";
     }
     
 }
