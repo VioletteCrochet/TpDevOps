@@ -1,0 +1,39 @@
+name: Branch Conditions Demo
+
+on:
+  push:
+
+jobs:
+  build:
+    name: Build (toutes branches)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simuler build
+        run: echo "🔨 Build en cours sur la branche ${{ github.ref }}"
+
+  ci:
+    name: CI (develop & feature/*)
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature/')
+    steps:
+      - name: Simuler CI
+        run: echo "✅ CI exécutée pour ${{ github.ref }}"
+
+  release:
+    name: Release (release/* sauf hotfix/*)
+    runs-on: ubuntu-latest
+    needs: ci
+    if: startsWith(github.ref, 'refs/heads/release/') && !startsWith(github.ref, 'refs/heads/hotfix/')
+    steps:
+      - name: Simuler release
+        run: echo "🚀 Release en cours pour ${{ github.ref }}"
+
+  hotfix:
+    name: Hotfix (hotfix/*)
+    runs-on: ubuntu-latest
+    needs: build
+    if: startsWith(github.ref, 'refs/heads/hotfix/')
+    steps:
+      - name: Simuler hotfix
+        run: echo "🛠️ Hotfix démarré pour ${{ github.ref }}"
